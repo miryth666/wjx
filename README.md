@@ -41,11 +41,9 @@ pip install requests beautifulsoup4 ddddocr colorama
 可以在manu_answer函数中增加AI回答逻辑
 
 ### 运行脚本
-运行代码后，输入问卷星链接（支持完整URL或7位shortid）：
+运行代码后，输入问卷星链接（完整URL）：
 ```
 示例URL：https://www.wjx.cn/vm/AbC1234.aspx
-或
-示例输入：AbC1234
 ```
 
 ---
