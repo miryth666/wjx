@@ -48,7 +48,7 @@ def submit(shortid,requests_result,data):
         rndnum, jqnonce, starttime = rndnum[0],jqnonce[0],starttime[0]
         cook = res.cookies
         # input(str(cook))
-        time.sleep(2) # 确定性时延
+        # time.sleep(2) # 确定性时延
     except:
         traceback.print_exc()
         print('程序继续执行！')
@@ -418,17 +418,17 @@ if __name__ == '__main__':
         '邮箱': 'xxx',
         '预留': 'xxx',
     }
-    id = input('问卷网址')
-    pattern = r"https://www\.wjx\.cn/vm/([A-Za-z0-9]+)\.aspx"
-    if len(id)!=7:
-        id = re.search(pattern,id).group(1)
+    url = input('问卷网址')
+    pattern = r"https://www\.wjx.*/vm/([A-Za-z0-9]+)\.aspx"
+    if len(url)!=7:
+        id = re.search(pattern,url).group(1)
     # print(id)
     js = 0
-    html = requests.get(f'https://www.wjx.cn/vm/{id}.aspx',headers={'accept': 'application/json, text/plain, */*', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8', 'cache-control': 'no-cache', 'connection': 'keep-alive', 'content-length': '0', 'pragma': 'no-cache', 'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'empty', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'same-site', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'})
+    html = requests.get(url,headers={'accept': 'application/json, text/plain, */*', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8', 'cache-control': 'no-cache', 'connection': 'keep-alive', 'content-length': '0', 'pragma': 'no-cache', 'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'empty', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'same-site', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'})
     # 这里要做一个忙等待
-    while '很抱歉' in html or '距离开始' in html:
+    while '很抱歉' in html.text or '距离开始' in html.text:
         js +=1
-        html = requests.get(f'https://www.wjx.cn/vm/{id}.aspx')
+        html = requests.get(url,headers={'accept': 'application/json, text/plain, */*', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8', 'cache-control': 'no-cache', 'connection': 'keep-alive', 'content-length': '0', 'pragma': 'no-cache', 'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'empty', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'same-site', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'})
         print(Fore.YELLOW+f'等待中！(等待第{js}次)',end=' ')
         time.sleep(0.7)
     st = time.time()
@@ -436,5 +436,5 @@ if __name__ == '__main__':
     # print(data)
     send_data = handle_questions(data)
     print(Fore.RED+f'已经耗时：{time.time()-st:.3}秒！') # 在刚写完识图的时候，这个全部操作不用多线程也就1.18秒
-    print('即将启动发送程序！！') # 【dg】后删！！！
+    print('即将启动发送程序！！')
     submit(id,html,send_data)
