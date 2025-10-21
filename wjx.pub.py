@@ -1,5 +1,5 @@
 # 时间：2025/4/1022:46
-'''弄好了过后搬过来的，这个例子告诉我们，还是要把普通的东西(请求头)先排除了再去想高级反爬'''
+'''一个公开版，如果ddddocr无法安装，可以把有关代码注释，除了不能处理图片题之外，不会影响正常使用'''
 import os
 import pprint
 import traceback
@@ -438,3 +438,4 @@ if __name__ == '__main__':
     print(Fore.RED+f'已经耗时：{time.time()-st:.3}秒！') # 在刚写完识图的时候，这个全部操作不用多线程也就1.18秒
     print('即将启动发送程序！！')
     submit(id,html,send_data)
+
